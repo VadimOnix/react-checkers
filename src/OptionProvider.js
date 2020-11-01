@@ -1,4 +1,4 @@
-const { createContext, useContext } = require('react');
+import React, { useContext, createContext } from 'react';
 
 // Объект контекста, который будет доступен во всех компонентах
 export const options = {
@@ -12,7 +12,13 @@ export const options = {
 
 const OptionContext = createContext(options);
 
-export default OptionContext;
+export default function OptionProvider({ children }) {
+  return (
+    <OptionContext.Provider value={options}>
+      {children}
+    </OptionContext.Provider>
+  );
+}
 
 // Собственный хук, для того, чтобы не дублировать во всех компонентах "useContext(OptionContext)"
 export const useOptions = () => useContext(OptionContext);
