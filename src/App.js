@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Board from './components/Board';
-import DimensionInput from './components/DimensionInput';
-import OptionContext, { options } from './OptionContext';
+import GameProvider from './GameProvider';
+import OptionProvider from './OptionProvider';
 
 function App() {
-  const [myDimension, setMyDimension] = useState(8);
-
   return (
     // Оборачиваем приложение в провайдер контекста
-    <OptionContext.Provider value={options}>
-      <div className="App">
-        <Board />
-        <DimensionInput change={setMyDimension} />
-      </div>
-    </OptionContext.Provider>
+    <GameProvider>
+      <OptionProvider>
+        <div className="App">
+          <Board />
+        </div>
+        </OptionProvider>
+    </GameProvider>
   );
 }
 
