@@ -11,9 +11,9 @@ const HorizontalAlphabetDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: auto ${props => props.VNW}px;
-  width: ${props => props.dimension * props.cellSize}px;
-  height: ${props => props.HAH}px;
+  margin: auto ${(props) => props.VNW}px;
+  width: ${(props) => props.dimension * props.cellSize}px;
+  height: ${(props) => props.HAH}px;
   color: white;
 `;
 
@@ -24,7 +24,11 @@ export default function HorizontalAlphabet() {
   const labels = useMemo(() => {
     let labels = [];
     for (let i = 0; i < options.dimension; i++) {
-      labels.push(<p key={i}><b>{alphabetArray[i].toUpperCase()}</b></p>);
+      labels.push(
+        <p key={i}>
+          <b>{alphabetArray[i].toUpperCase()}</b>
+        </p>
+      );
     }
     return labels;
   }, [options.dimension]);

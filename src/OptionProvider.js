@@ -14,9 +14,7 @@ const OptionContext = createContext(options);
 
 export default function OptionProvider({ children }) {
   return (
-    <OptionContext.Provider value={options}>
-      {children}
-    </OptionContext.Provider>
+    <OptionContext.Provider value={options}>{children}</OptionContext.Provider>
   );
 }
 

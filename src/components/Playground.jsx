@@ -24,25 +24,18 @@ export default function Playground() {
   for (let i = 0; i < grid.length; i++) {
     renderGrid.push([]);
     for (let j = 0; j < grid[i].length; j++) {
-      if ((i % 2 !== 0 && j % 2 !== 0) || (i % 2 === 0 && j % 2 === 0)) {
-        renderGrid[i].push(
-          <Cell
-            key={`${i} ${j}`}
-            color={options.primaryColor}
-            size={options.cellSize}
-            value={grid[i][j]}
-          />
-        );
-      } else {
-        renderGrid[i].push(
-          <Cell
-            key={`${i} ${j}`}
-            color={options.secondColor}
-            size={options.cellSize}
-            value={grid[i][j]}
-          />
-        );
-      }
+      renderGrid[i].push(
+        <Cell
+          key={`${i} ${j}`}
+          color={
+            (i % 2 !== 0 && j % 2 !== 0) || (i % 2 === 0 && j % 2 === 0)
+              ? options.primaryColor
+              : options.secondColor
+          }
+          size={options.cellSize}
+          value={grid[i][j]}
+        />
+      );
     }
   }
 

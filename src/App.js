@@ -11,7 +11,7 @@ function App() {
         <div className="App">
           <Board />
         </div>
-        </OptionProvider>
+      </OptionProvider>
     </GameProvider>
   );
 }
