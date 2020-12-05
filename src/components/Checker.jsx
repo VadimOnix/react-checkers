@@ -1,5 +1,7 @@
 import React from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
+import { useGame } from '../GameProvider';
 
 const StyledDiv = styled.div`
   background-color: ${(props) => props.color};
@@ -10,5 +12,6 @@ const StyledDiv = styled.div`
 `;
 
 export default function Checker(props) {
-  return <StyledDiv {...props} />;
+  const {selectChecker} = useGame()
+  return <StyledDiv {...props} onClick={()=>selectChecker(props.coords)}/>;
 }

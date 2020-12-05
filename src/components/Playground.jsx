@@ -27,6 +27,7 @@ export default function Playground() {
       renderGrid[i].push(
         <Cell
           key={`${i} ${j}`}
+          id={{row: i, column: j}}
           color={
             (i % 2 !== 0 && j % 2 !== 0) || (i % 2 === 0 && j % 2 === 0)
               ? options.primaryColor
