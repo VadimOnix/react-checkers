@@ -15,13 +15,19 @@ const StyledDiv = styled.div`
   font-size: 2rem;
 `;
 
-export default function Cell({ color, size, value, key, id: coords }) {
+export default function Cell({ color, size, value, coords }) {
   const { availableCells } = useGame();
 
   const [modifyColor, setModifyColor] = useState(null);
 
   useEffect(() => {
-    if (availableCells.some(c => c.row == coords.row && c.column == coords.column)){ setModifyColor('#FCCF5D')} else {setModifyColor(null)} 
+    
+    if ( availableCells.some(c => c.row == coords.row && c.column == coords.column) ) {
+      setModifyColor('#FCCF5D')
+    } else {
+      setModifyColor(null)
+    } 
+
   }, [availableCells]);
 
   return (
