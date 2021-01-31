@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { useGame } from '../GameProvider';
 import { useOptions } from '../OptionProvider';
@@ -19,7 +19,6 @@ export default function Playground() {
 
   /** Массив с ячейками игрового поля */
   let renderGrid = [];
-
   /** Алгоритм заполнения закрашенными ячейками игрового поля */
   for (let i = 0; i < grid.length; i++) {
     renderGrid.push([]);
@@ -27,7 +26,7 @@ export default function Playground() {
       renderGrid[i].push(
         <Cell
           key={`${i} ${j}`}
-          coords={{row: i, column: j}}
+          coords={{ row: i, column: j }}
           color={
             (i % 2 !== 0 && j % 2 !== 0) || (i % 2 === 0 && j % 2 === 0)
               ? options.primaryColor

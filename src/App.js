@@ -5,7 +5,7 @@ import OptionProvider from './OptionProvider';
 import {Link, Switch, Route} from 'react-router-dom'
 import ExampleForm from './components/ExampleForm';
 import ProtectedPage from './components/ProtectedPage';
-import { useAuth } from './AuthProvider';
+import {useAuth} from './AuthProvider';
 
 
 function App() {

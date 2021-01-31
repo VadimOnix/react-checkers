@@ -16,22 +16,24 @@ const StyledDiv = styled.div`
 `;
 
 export default function Cell({ color, size, value, coords }) {
-  const { availableCells } = useGame();
+  const { availableCells, move } = useGame();
 
   const [modifyColor, setModifyColor] = useState(null);
 
   useEffect(() => {
-    
     if ( availableCells.some(c => c.row == coords.row && c.column == coords.column) ) {
       setModifyColor('#FCCF5D')
     } else {
       setModifyColor(null)
     } 
-
   }, [availableCells]);
 
+  const clickHandler = (event) => {
+    move(coords)
+  }
+
   return (
-    <StyledDiv size={size} color={!!modifyColor ? modifyColor : color}>
+    <StyledDiv size={size} color={!!modifyColor ? modifyColor : color} onClick={clickHandler}>
       {!!value && (
         <Checker
           color={value % 2 != 0 ? 'black' : 'white'}
