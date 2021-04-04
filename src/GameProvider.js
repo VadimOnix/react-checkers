@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { CONSTANTS } from './CONSTANTS';
 
 const GameContext = createContext();
 
@@ -15,7 +16,7 @@ export default function GameProvider({ children }) {
     [2, 0, 2, 0, 2, 0, 2, 0],
   ]);
   // состояние текущего игрока
-  const [currentPlayer, setCurrentPlayer] = useState(2);
+  const [currentPlayer, setCurrentPlayer] = useState(CONSTANTS.FIRST_PLAYER);
   // подтвердженная выбранная ячейка
   const [selectedCell, setSelectedCell] = useState(null);
   // ячейки, доступные для хода
@@ -31,20 +32,32 @@ export default function GameProvider({ children }) {
     let cells = [];
 
     if (grid[selectedCell.row + 1][selectedCell.column + 1] === 0)
-      cells.push({ row: selectedCell.row + 1, column: selectedCell.column + 1 });
-    
+      cells.push({
+        row: selectedCell.row + 1,
+        column: selectedCell.column + 1,
+      });
+
     if (grid[selectedCell.row + 1][selectedCell.column - 1] === 0)
-      cells.push({ row: selectedCell.row + 1, column: selectedCell.column - 1 });
-    
+      cells.push({
+        row: selectedCell.row + 1,
+        column: selectedCell.column - 1,
+      });
+
     if (grid[selectedCell.row - 1][selectedCell.column + 1] === 0)
-      cells.push({ row: selectedCell.row - 1, column: selectedCell.column + 1 });
-    
+      cells.push({
+        row: selectedCell.row - 1,
+        column: selectedCell.column + 1,
+      });
+
     if (grid[selectedCell.row - 1][selectedCell.column - 1] === 0)
-      cells.push({ row: selectedCell.row - 1, column: selectedCell.column - 1 });
-    
+      cells.push({
+        row: selectedCell.row - 1,
+        column: selectedCell.column - 1,
+      });
+
     setAvailableCells(cells);
   };
-  
+
   // функция выбора шашки
   const selectChecker = (cell) => {
     if (isEmptyCell(cell)) return null;
@@ -80,26 +93,33 @@ export default function GameProvider({ children }) {
   // алгоритм хода для шашки
   const move = (coords) => {
     // если не выбрана шашка, то ничего не делать
-    if (!selectedCell) return
+    if (!selectedCell) return;
     // флаг проверки, что далее будет выбрана ячека из доступных
-    let isAvailableCell = false
+    let isAvailableCell = false;
     // проверка на доступность хода в вбыранную ячейку
-    availableCells.forEach(aCell => {
-      if (aCell.row == coords.row && aCell.column == coords.column)
-        isAvailableCell = true
-    })
+    availableCells.forEach((aCell) => {
+      if (aCell.row === coords.row && aCell.column === coords.column)
+        isAvailableCell = true;
+    });
     // если ход не подтверждён, то прекращаем процесс хода
-    if (!isAvailableCell) return
+    if (!isAvailableCell) return;
     // если ячейка была доступна для хода, то выполняем ход, перезаписываем значения в игровой сетке
-    let newGrid = [...grid]
-    let temp = newGrid[selectedCell.row][selectedCell.column]
-    newGrid[selectedCell.row][selectedCell.column] = newGrid[coords.row][coords.column]
-    newGrid[coords.row][coords.column] = temp
-    setGrid(newGrid)
+    let newGrid = [...grid];
+    let temp = newGrid[selectedCell.row][selectedCell.column];
+    newGrid[selectedCell.row][selectedCell.column] =
+      newGrid[coords.row][coords.column];
+    newGrid[coords.row][coords.column] = temp;
+    setGrid(newGrid);
     // сбрасываем параметры хода
-    setSelectedCell(null)
-    setAvailableCells([])
-  }
+    setSelectedCell(null);
+    setAvailableCells([]);
+    // сменить игрока
+    setCurrentPlayer((prevState) =>
+      prevState === CONSTANTS.FIRST_PLAYER
+        ? CONSTANTS.SECOND_PLAYER
+        : CONSTANTS.FIRST_PLAYER
+    );
+  };
 
   return (
     <GameContext.Provider value={{ move, grid, selectChecker, availableCells }}>

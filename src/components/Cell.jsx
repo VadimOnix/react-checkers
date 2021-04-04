@@ -21,12 +21,12 @@ export default function Cell({ color, size, value, coords }) {
   const [modifyColor, setModifyColor] = useState(null);
 
   useEffect(() => {
-    if ( availableCells.some(c => c.row == coords.row && c.column == coords.column) ) {
+    if ( availableCells.some(c => c.row === coords.row && c.column === coords.column) ) {
       setModifyColor('#FCCF5D')
     } else {
       setModifyColor(null)
     } 
-  }, [availableCells]);
+  }, [availableCells, coords.column, coords.row]);
 
   const clickHandler = (event) => {
     move(coords)
@@ -36,7 +36,7 @@ export default function Cell({ color, size, value, coords }) {
     <StyledDiv size={size} color={!!modifyColor ? modifyColor : color} onClick={clickHandler}>
       {!!value && (
         <Checker
-          color={value % 2 != 0 ? 'black' : 'white'}
+          color={value % 2 !== 0 ? 'black' : 'white'}
           isQueen={value > 2}
           coords={coords}
         />

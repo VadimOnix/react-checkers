@@ -9,7 +9,7 @@ export default function ProtectedPage() {
   useEffect(() => {
     if (!isAuth)
       history.push("/form")
-  }, [isAuth])
+  }, [isAuth, history])
 
   return (
     <div>

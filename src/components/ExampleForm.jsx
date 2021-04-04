@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../AuthProvider';
 
 export default function ExampleForm() {
-  const { user, isAuth, error, login } = useAuth();
+  const { isAuth, error, login } = useAuth();
 
   const [formData, setFormData] = useState({
     pass: '',

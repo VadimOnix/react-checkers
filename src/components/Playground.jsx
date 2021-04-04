@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useGame } from '../GameProvider';
 import { useOptions } from '../OptionProvider';

@@ -1,20 +1,12 @@
 import React, { useContext, createContext } from 'react';
+import { OPTIONS } from './CONSTANTS';
 
-// Объект контекста, который будет доступен во всех компонентах
-export const options = {
-  dimension: 8,
-  primaryColor: '#dbae95',
-  secondColor: '#6c5040',
-  HAH: 40, // horizontalAlphabetHeight
-  VNW: 40, // verticalNumericWidth
-  cellSize: 80, // размерность ячейки в пикселях
-};
 
-const OptionContext = createContext(options);
+const OptionContext = createContext(OPTIONS);
 
 export default function OptionProvider({ children }) {
   return (
-    <OptionContext.Provider value={options}>{children}</OptionContext.Provider>
+    <OptionContext.Provider value={OPTIONS}>{children}</OptionContext.Provider>
   );
 }
 
